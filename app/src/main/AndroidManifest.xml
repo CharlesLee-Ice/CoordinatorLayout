@@ -17,6 +17,8 @@
         </activity>
         <activity android:name=".CheeseDetailsActivity" >
         </activity>
+        <activity android:name=".CollapsingToolbarActivity">
+        </activity>
     </application>
 
 </manifest>

@@ -40,20 +40,26 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
-            ((ViewHolder) holder).fillContent(AppBarScrollType.values()[position].toString());
+            ((ViewHolder) holder).fillContent(CoordinatorScrollType.values()[position].toString());
             ((ViewHolder) holder).mView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(mContent, CheeseDetailsActivity.class);
-                    intent.putExtra(CheeseDetailsActivity.KEY_APP_BAR, position);
-                    mContent.startActivity(intent);
+
+                    if (position <= CoordinatorScrollType.AppBar_Scroll_Snap.ordinal()) {
+                        Intent intent = new Intent(mContent, CheeseDetailsActivity.class);
+                        intent.putExtra(CheeseDetailsActivity.KEY_APP_BAR, position);
+                        mContent.startActivity(intent);
+                    } else {
+                        Intent intent = new Intent(mContent, CollapsingToolbarActivity.class);
+                        mContent.startActivity(intent);
+                    }
                 }
             });
         }
 
         @Override
         public int getItemCount() {
-            return AppBarScrollType.values().length;
+            return CoordinatorScrollType.values().length;
         }
 
         private static class ViewHolder extends RecyclerView.ViewHolder {

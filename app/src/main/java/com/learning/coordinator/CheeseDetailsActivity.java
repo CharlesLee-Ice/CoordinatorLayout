@@ -2,9 +2,12 @@ package com.learning.coordinator;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -14,6 +17,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,14 +52,15 @@ public class CheeseDetailsActivity extends AppCompatActivity {
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         setupDataAdapter();
         mRecyclerView.setAdapter(mAdapter);
-    }
 
+        setupFab();
+    }
 
     private void setupToolbar() {
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
 
         Intent intent = getIntent();
-        AppBarScrollType type = AppBarScrollType.values()[intent.getIntExtra(KEY_APP_BAR, 0)];
+        CoordinatorScrollType type = CoordinatorScrollType.values()[intent.getIntExtra(KEY_APP_BAR, 0)];
         int scrollFlags = 0;
         switch (type) {
             case AppBar_Scroll:
@@ -88,6 +93,23 @@ public class CheeseDetailsActivity extends AppCompatActivity {
         setSupportActionBar(mToolbar);
     }
 
+    private void setupFab() {
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Snackbar.make(v, "Cheese", Snackbar.LENGTH_LONG)
+                        .setAction("UNDO", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Toast.makeText(CheeseDetailsActivity.this, "clicked", Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .setActionTextColor(Color.YELLOW)
+                        .show();
+            }
+        });
+    }
     private void setupDataAdapter() {
         mAdapter = new RecyclerViewAdapter(this);
         mAdapter.addData("");
