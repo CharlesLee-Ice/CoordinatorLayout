@@ -1,6 +1,6 @@
 ## CoordinatorLayout
 
-About CoordinatorLayout, AppBarLayout,  CollapsingToolbarLayout, FloatingActionButton and Snackbar in android support design.
+About CoordinatorLayout, AppBarLayout,  CollapsingToolbarLayout, FloatingActionButton, Snackbar and BottomSheet in android support design.
 
 * AppBar_Scroll
 
